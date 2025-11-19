@@ -69,15 +69,6 @@ body::before {
     transition: 0.3s;
 }
 
-.btn:hover {
-    background: #ddd;
-}.products {
-   display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
 /* Container for all products */
 .product-grid {
     display: grid;
