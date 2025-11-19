@@ -22,7 +22,7 @@
   <div class="header-icons">
     <span class="search">🔍</span>
     <a href="account.html" class="account">👤</a>
-    <span class="cart">🛒</span>
+    <a href="cart.html">🛒</a>
   </div>
 </header>
 
@@ -117,7 +117,12 @@
     <h3 class="product-name">Mosuf Brown</h3>
     <p class="price">₦20,000</p>
     <p class="description">A warm blend of smoky woods and amber that gives elegance from the first spray.</p>
-    <button class="btn">Add to Cart</button>
+    <button class="btn add-to-cart"
+    data-name="Mosuf Brown"
+    data-price="20000"
+    data-img="images/mosuf-brown.jpg">
+    Add to Cart
+</button>
 </div>
 
 <!-- PRODUCT 2 -->
@@ -126,7 +131,12 @@
     <h3 class="product-name">Interlude Amouage</h3>
     <p class="price">₦20,000</p>
     <p class="description">A deep mix of spice and sweet woods that leaves a bold, lasting impression.</p>
-    <button class="btn">Add to Cart</button>
+    <button class="btn add-to-cart"
+    data-name="Interlude Amouage"
+    data-price="20000"
+    data-img="images/placeholder1.jpg">
+    Add to Cart
+</button>
 </div>
 
 <!-- PRODUCT 3 -->
@@ -334,6 +344,33 @@
     }
   });
 </script>
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+document.querySelectorAll(".add-to-cart").forEach(btn => {
+    btn.addEventListener("click", () => {
+        let name = btn.dataset.name;
+        let price = Number(btn.dataset.price);
+        let img = btn.dataset.img;
+
+        let existing = cart.find(item => item.name === name);
+
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                img: img,
+                quantity: 1
+            });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert(name + " added to cart!");
+    });
+});
+</script>
 </body>
 </html>
