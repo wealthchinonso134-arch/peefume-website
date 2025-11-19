@@ -9,20 +9,103 @@
 </head>
 <body>
 
-  <header class="header">
-    <div class="menu-icon">☰</div>
+ <!-- HEADER + SIDEBAR (paste into shop.html replacing your current header/sidebar section) -->
+<header class="header">
+  <!-- menu icon (left) -->
+  <div class="menu-icon" id="openSidebar">&#9776;</div>
 
-    <div class="logo">
-        <h2>Frankare Perfumes</h2>
-    </div>
+  <div class="logo">
+    <h2>Frankare Perfumes</h2>
+  </div>
 
-    <div class="header-icons">
-        <span class="search">🔍</span>
-        <a href="account.html" class="account">👤</a>
-        <span class="more">⋮</span>
-        <span class="cart">🛒</span>
-    </div>
+  <div class="header-icons">
+    <span class="search">🔍</span>
+    <a href="account.html" class="account">👤</a>
+    <span class="cart">🛒</span>
+  </div>
 </header>
+
+<!-- Sidebar (hidden by default) -->
+<div id="sidebar" class="sidebar" aria-hidden="true">
+  <div class="sidebar-header">
+    <h3>Menu</h3>
+    <span id="closeSidebar" class="close-btn" aria-label="Close sidebar">&times;</span>
+  </div>
+
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+
+    <li class="title">Categories</li>
+    <li><a href="#">Men's Perfumes</a></li>
+    <li><a href="#">Women's Perfumes</a></li>
+    <li><a href="#">Unisex Perfumes</a></li>
+    <li><a href="#">Oil Perfumes</a></li>
+    <li><a href="#">Body Sprays</a></li>
+
+    <li class="title">Account</li>
+    <li><a href="account.html">My Account</a></li>
+
+    <li class="title">Info</li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<!-- SIMPLE CSS: paste into style.css (or include in a <style> block) -->
+<style>
+/* Sidebar base */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -320px;       /* hidden off-screen */
+  width: 300px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.25);
+  padding: 20px;
+  z-index: 2000;
+  transition: left 0.28s ease;
+  overflow-y: auto;
+}
+
+/* When visible */
+.sidebar.show {
+  left: 0;
+}
+
+/* header layout */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  background: transparent;
+}
+
+/* hamburger icon */
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* close button in sidebar */
+.close-btn{
+  cursor: pointer;
+  font-size: 28px;
+}
+
+/* small styling of the sidebar content */
+.sidebar-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+.sidebar ul{ list-style:none; padding:0; margin:0;}
+.sidebar li{ margin:8px 0;}
+.sidebar a{ text-decoration:none; color:#222; }
+.title{ font-weight:bold; margin-top:10px; color:#666; }
+</style>
+
+
+<div class="products">
 
   <div class="products">
    <div class="product-grid">
@@ -206,4 +289,50 @@
     <p class="description">A cool metallic fresh scent perfect for daily wear.</p>
     <button class="btn">Add to Cart</button>
 </div>
-    
+    </div>  <!-- product-grid -->
+</div>  <!-- products -->
+
+<script>
+ // defensive selection + logging for debug
+  const menuIcon = document.getElementById('openSidebar');
+  const sidebar = document.getElementById('sidebar');
+  const closeSidebar = document.getElementById('closeSidebar');
+
+  console.log('menuIcon ->', menuIcon);
+  console.log('sidebar ->', sidebar);
+  console.log('closeSidebar ->', closeSidebar);
+
+  if (menuIcon && sidebar) {
+    menuIcon.addEventListener('click', () => {
+      sidebar.classList.add('show');
+      sidebar.setAttribute('aria-hidden','false');
+      console.log('sidebar opened');
+    });
+  } else {
+    console.warn('menuIcon or sidebar not found in DOM');
+  }
+
+  if (closeSidebar && sidebar) {
+    closeSidebar.addEventListener('click', () => {
+      sidebar.classList.remove('show');
+      sidebar.setAttribute('aria-hidden','true');
+      console.log('sidebar closed');
+    });
+  } else {
+    console.warn('closeSidebar or sidebar not found in DOM');
+  }
+
+  // Close sidebar when clicking outside it (optional)
+  document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !menuIcon.contains(e.target)) {
+      if (sidebar.classList.contains('show')) {
+        sidebar.classList.remove('show');
+        sidebar.setAttribute('aria-hidden','true');
+        console.log('sidebar closed by outside click');
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
