@@ -254,3 +254,9 @@ body::before {
     padding: 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
+/* FIX: header turning transparent after adding sidebar */
+header {
+    background: rgb(48, 138, 76) !important;
+    position: relative;
+    z-index: 3000;
+}
