@@ -120,27 +120,27 @@ body::before {
     font-weight: bold;
 }
 .header {
-  width: 100%;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    padding: 6px 12px;   /* Smaller padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .menu-icon {
-  font-size: 25px;
-  cursor: pointer;
+    font-size: 20px;   /* was 25px */
+    cursor: pointer;
 }
 
 .header-icons span {
-  font-size: 22px;
-  margin-left: 15px;
-  cursor: pointer;
+    font-size: 18px;     /* was 22px */
+    margin-left: 10px;   /* reduce spacing */
+    cursor: pointer;
 }
 .scroll-section {
   margin: 20px;
@@ -259,4 +259,10 @@ header {
     background: rgb(48, 138, 76) !important;
     position: relative;
     z-index: 3000;
+}
+.header {
+    height: 55px;     /* force the header to be small */
+    padding: 0 12px;  /* remove top/bottom padding */
+    display: flex;
+align-items: center;
 }
